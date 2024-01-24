@@ -33,5 +33,22 @@ public class Login_stepdefs {
         Assert.assertEquals(expectedUrl, actualUrl);
     }
 
+    @When("Enter {string} and {string}")
+    public void enter_and(String string, String string2) {
+        loginPage.enterUsernameAndPassword(string, string2);
+    }
+
+    @When("Tap on login button")
+    public void tap_on_login_button() {
+        loginPage.tapOnLoginButton();
+    }
+
+    @Then("Validate error message is displayed")
+    public void validate_error_message_is_displayed() {
+     String expectedErrorMessage = "Login and/or password are wrong.";
+        String actualErrorMessage = loginPage.getErrorMessageText();
+        Assert.assertEquals(expectedErrorMessage,actualErrorMessage);
+    }
+
 
 }

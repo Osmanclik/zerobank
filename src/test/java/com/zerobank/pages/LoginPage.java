@@ -18,18 +18,33 @@ public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//input[@value='Sign in']")
     private WebElement loginButton;
+    @FindBy(css = ".alert.alert-error")
+    private WebElement errorMessage;
 
-    public void login(){
+    public void login() {
 
-       // loginInputBox.sendKeys(ConfigurationReader.get("username"));
+        // loginInputBox.sendKeys(ConfigurationReader.get("username"));
         BrowserUtils.sendKeys(loginInputBox, ConfigurationReader.get("username")); //browserUtils webelemente text gönderme
 
-       // passwordInputBox.sendKeys(ConfigurationReader.get("password"));
-        BrowserUtils.sendKeys(passwordInputBox,ConfigurationReader.get("password")); //browserUtils webelemente text gönderme
+        // passwordInputBox.sendKeys(ConfigurationReader.get("password"));
+        BrowserUtils.sendKeys(passwordInputBox, ConfigurationReader.get("password")); //browserUtils webelemente text gönderme
 
-       //loginButton.click();
+        //loginButton.click();
         BrowserUtils.clickWithJS(loginButton); //browserUtils webelemente click yapma
         Driver.get().navigate().back(); //sayfadaki problem gereği back butonu ile geri geldim
+    }
+
+    public void enterUsernameAndPassword(String str1, String str2) {
+        BrowserUtils.sendKeys(loginInputBox, str1);
+        BrowserUtils.sendKeys(passwordInputBox, str2);
+    }
+
+    public void tapOnLoginButton() {
+        BrowserUtils.clickWithJS(loginButton);
+    }
+
+    public String getErrorMessageText() {
+        return BrowserUtils.getText(errorMessage);
     }
 
 }
